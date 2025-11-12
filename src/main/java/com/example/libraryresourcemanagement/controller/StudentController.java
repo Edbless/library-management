@@ -27,7 +27,7 @@ public class StudentController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showAddForm(Model model) {
         model.addAttribute("student", new Student());
-        model.addAttribute("librarians", librarianManager.getAllLibrarians()); // added for dropdown
+        model.addAttribute("librarians", librarianManager.getAllLibrarians());
         return "students/form";
     }
 
