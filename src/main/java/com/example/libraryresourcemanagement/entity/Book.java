@@ -1,13 +1,11 @@
 package com.example.libraryresourcemanagement.entity;
 
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +19,15 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @ManyToOne
+    @JoinColumn(name = "librarian_id") // NEW: Librarian managing this book
+    private Librarian librarian;
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Borrowing> borrowings;
 
     // Constructors
-    public Book (){}
+    public Book() {}
 
     public Book(Long id, Long quantity, LocalDate yr_published, String title) {
         this.id = id;
@@ -35,53 +37,31 @@ public class Book {
     }
 
     // Getters and Setters
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getTitle() { return title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public LocalDate getYr_published() { return yr_published; }
 
-    public LocalDate getYr_published() {
-        return yr_published;
-    }
+    public void setYr_published(LocalDate yr_published) { this.yr_published = yr_published; }
 
-    public void setYr_published(LocalDate yr_published) {
-        this.yr_published = yr_published;
-    }
+    public Long getQuantity() { return quantity; }
 
-    public Long getQuantity() {
-        return quantity;
-    }
+    public void setQuantity(Long quantity) { this.quantity = quantity; }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
+    public Author getAuthor() { return author; }
 
-    public Author getAuthor() {
-        return author;
-    }
+    public void setAuthor(Author author) { this.author = author; }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
+    public Librarian getLibrarian() { return librarian; }
 
-    public List<Borrowing> getBorrowings() {
-        return borrowings;
-    }
+    public void setLibrarian(Librarian librarian) { this.librarian = librarian; }
 
-    public void setBorrowings(List<Borrowing> borrowings) {
-        this.borrowings = borrowings;
-    }
+    public List<Borrowing> getBorrowings() { return borrowings; }
+
+    public void setBorrowings(List<Borrowing> borrowings) { this.borrowings = borrowings; }
 }
-

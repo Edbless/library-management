@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "librarian")
+@Table(name = "librarians")
 public class Librarian {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String fullName;
-    private String username;
+    private String email;
+    private String phoneNumber;
     private String password;
 
     @OneToMany(mappedBy = "librarian", cascade = CascadeType.ALL)
@@ -20,13 +21,13 @@ public class Librarian {
     // Constructors
     public Librarian (){}
 
-    public Librarian(Long id, String fullName, String username, String password) {
+    public Librarian(Long id, String fullName, String email, String phoneNumber, String password) {
         this.id = id;
         this.fullName = fullName;
-        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.password = password;
     }
-
     // Getters and setters
 
     public Long getId() {
@@ -45,12 +46,20 @@ public class Librarian {
         this.fullName = fullName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

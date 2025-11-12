@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Borrowing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Add Borrowing</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/borrowings/save}" th:object="${borrowing}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Student</label>
+                    <select class="form-select" th:field="*{student}" required>
+                        <option value="">-- Select Student --</option>
+                        <option th:each="s : ${students}" th:value="${s.id}" th:text="${s.fullName}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Book</label>
+                    <select class="form-select" th:field="*{book}" required>
+                        <option value="">-- Select Book --</option>
+                        <option th:each="b : ${books}" th:value="${b.id}" th:text="${b.title}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Borrowed Date</label>
+                    <input type="date" class="form-control" th:field="*{borrowedDate}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Return Date</label>
+                    <input type="date" class="form-control" th:field="*{returnDate}" required>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2">Save</button>
+                    <a th:href="@{/borrowings/list}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
