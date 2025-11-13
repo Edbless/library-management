@@ -10,5 +10,7 @@ public interface BorrowingService {
     Borrowing updateBorrowing(Long id, Borrowing borrowing);
     void deleteBorrowing(Long id);
 
+    void editBorrowing(Borrowing borrowing);
+
 //    void addBorrowing(Borrowing borrowing);
 }

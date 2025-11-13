@@ -20,7 +20,7 @@ public class BookController {
     private AuthorManager authorManager;
 
     @Autowired
-    private LibrarianManager librarianManager; // added
+    private LibrarianManager librarianManager;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listBooks(Model model) {
@@ -40,6 +40,15 @@ public class BookController {
     public String saveBook(@ModelAttribute Book book) {
         bookManager.saveBook(book);
         return "redirect:/books/list";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Book book = bookManager.getBookById(id);
+        model.addAttribute("book", book);
+        model.addAttribute("authors", authorManager.getAllAuthors());
+        model.addAttribute("librarians", librarianManager.getAllLibrarians());
+        return "books/form";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

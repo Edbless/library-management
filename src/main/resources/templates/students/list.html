@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
@@ -32,9 +32,10 @@
             <td th:text="${student.email}"></td>
             <td th:text="${student.phoneNumber}"></td>
             <td th:text="${student.address}"></td>
-            <td th:text="${student.librarian != null ? student.librarian.name : '—'}"></td>
+            <td th:text="${student.librarian != null ? student.librarian.fullName : '—'}"></td>
             <td>
-                <a th:href="@{'/students/delete'(id=${student.id})}" class="btn btn-danger btn-sm">Delete</a>
+                <a th:href="@{'/students/edit?id=' + ${student.id}}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{'/students/delete?id=' + ${student.id}}" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
         </tbody>

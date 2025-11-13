@@ -13,6 +13,7 @@
         </div>
         <div class="card-body">
             <form th:action="@{/librarians/save}" th:object="${librarian}" method="post">
+                <input type="hidden" th:field="*{id}">
                 <div class="mb-3">
                     <label class="form-label">Full Name
                         <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" required>

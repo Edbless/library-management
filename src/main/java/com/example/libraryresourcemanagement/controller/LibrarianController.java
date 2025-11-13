@@ -1,6 +1,5 @@
 package com.example.libraryresourcemanagement.controller;
 
-
 import com.example.libraryresourcemanagement.entity.Librarian;
 import com.example.libraryresourcemanagement.service.LibrarianManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,17 @@ public class LibrarianController {
         return "librarians/form";
     }
 
+    // GET mapping for edit
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Librarian librarian = librarianManager.getLibrarianById(id);
+        model.addAttribute("librarian", librarian);
+        return "librarians/form";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveLibrarian(@ModelAttribute Librarian librarian) {
-        librarianManager.saveLibrarian(librarian);
+        librarianManager.saveLibrarian(librarian); // Save or update depending on ID
         return "redirect:/librarians/list";
     }
 

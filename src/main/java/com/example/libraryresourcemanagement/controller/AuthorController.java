@@ -1,6 +1,5 @@
 package com.example.libraryresourcemanagement.controller;
 
-
 import com.example.libraryresourcemanagement.entity.Author;
 import com.example.libraryresourcemanagement.service.AuthorManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,17 @@ public class AuthorController {
         return "authors/form";
     }
 
+    // GET mapping for edit
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Author author = authorManager.getAuthorById(id);
+        model.addAttribute("author", author);
+        return "authors/form";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveAuthor(@ModelAttribute Author author) {
-        authorManager.saveAuthor(author);
+        authorManager.saveAuthor(author); // save or update depending on ID
         return "redirect:/authors/list";
     }
 
@@ -39,4 +46,3 @@ public class AuthorController {
         return "redirect:/authors/list";
     }
 }
-

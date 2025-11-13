@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <form th:action="@{/students/save}" th:object="${student}" method="post">
-
+                <input type="hidden" th:field="*{id}">
                 <div class="mb-3">
                     <label class="form-label">Full Name
                         <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" required>
@@ -29,7 +29,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Phone Number
-                    <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter phone number" required>
+                        <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter phone number" required>
                     </label>
                 </div>
 
@@ -43,7 +43,7 @@
                     <label class="form-label">Librarian
                     <select class="form-select" th:field="*{librarian}" required>
                         <option value="">-- Select Librarian --</option>
-                        <option th:each="l : ${librarians}" th:value="${l.id}" th:text="${l.name}"></option>
+                        <option th:each="l : ${librarians}" th:value="${l.id}" th:text="${l.fullName}"></option>
                     </select>
                     </label>
                 </div>

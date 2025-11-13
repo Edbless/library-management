@@ -1,6 +1,5 @@
 package com.example.libraryresourcemanagement.controller;
 
-
 import com.example.libraryresourcemanagement.entity.Borrowing;
 import com.example.libraryresourcemanagement.service.BookManager;
 import com.example.libraryresourcemanagement.service.BorrowingManager;
@@ -40,6 +39,23 @@ public class BorrowingController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveBorrowing(@ModelAttribute Borrowing borrowing) {
         borrowingManager.saveBorrowing(borrowing);
+        return "redirect:/borrowings/list";
+    }
+
+    // GET mapping to show edit form
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Borrowing borrowing = borrowingManager.getBorrowingById(id);
+        model.addAttribute("borrowing", borrowing);
+        model.addAttribute("students", studentManager.getAllStudents());
+        model.addAttribute("books", bookManager.getAllBooks());
+        return "borrowings/form";
+    }
+
+    // POST mapping to save edited borrowing
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editBorrowing(@ModelAttribute Borrowing borrowing) {
+        borrowingManager.editBorrowing(borrowing);
         return "redirect:/borrowings/list";
     }
 

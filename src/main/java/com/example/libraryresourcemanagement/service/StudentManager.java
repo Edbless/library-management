@@ -46,6 +46,11 @@ public class StudentManager implements StudentService {
         repository.deleteById(id);
     }
 
+    @Override
+    public void editStudent(Student student) {
+
+    }
+
 //    @Override
 //    public void addStudent(Student student) {
 //        repository.addStudent(student);

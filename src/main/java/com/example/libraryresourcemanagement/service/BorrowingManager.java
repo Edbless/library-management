@@ -46,6 +46,11 @@ public class BorrowingManager implements BorrowingService {
         repository.deleteById(id);
     }
 
+    @Override
+    public void editBorrowing(Borrowing borrowing) {
+
+    }
+
 //    @Override
 //    public void addBorrowing(Borrowing borrowing) {
 //        repository.addBorrowing(borrowing);

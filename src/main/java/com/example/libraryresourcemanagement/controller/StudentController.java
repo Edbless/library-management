@@ -37,6 +37,22 @@ public class StudentController {
         return "redirect:/students/list";
     }
 
+    // GET mapping to show the edit form
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Student student = studentManager.getStudentById(id);
+        model.addAttribute("student", student);
+        model.addAttribute("librarians", librarianManager.getAllLibrarians());
+        return "students/form";
+    }
+
+    // POST mapping to save edited student
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editStudent(@ModelAttribute Student student) {
+        studentManager.editStudent(student);
+        return "redirect:/students/list";
+    }
+
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteStudent(@RequestParam Long id) {
         studentManager.deleteStudent(id);

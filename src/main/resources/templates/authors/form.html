@@ -14,6 +14,7 @@
         </div>
         <div class="card-body">
             <form th:action="@{/authors/save}" th:object="${author}" method="post">
+                <input type="hidden" th:field="*{id}">
                 <div class="mb-3">
                     <label class="form-label">Full Name</label>
                     <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" required>
